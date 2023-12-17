@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "logo-buddy"
+version = "0.1.0"
+description = "Make cool versions of your logo fast."
+authors = ["David Rust-Smith <davidrustsmith@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+transformers = "^4.36.1"
+diffusers = "^0.24.0"
+accelerate = "^0.25.0"
+# xformers = "^0.0.23.post1"
+omegaconf = "^2.3.0"
+opencv-python-headless = "^4"
+
+[tool.poetry.dev-dependencies]
+pytest = "*"
+black = "*"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
