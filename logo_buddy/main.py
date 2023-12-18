@@ -18,6 +18,8 @@ import torch
 from .controlnet import preprocess, CN_MODELS
 from .utils import read_fit
 
+STEPS = 34
+SEED = 123
 MODELS = {
     "real": "/Users/drustsmith/repos/stable-diffusion-webui/models/Stable-diffusion/realisticVisionV51_v51VAE.safetensors",
     "anim": "/Users/drustsmith/repos/stable-diffusion-webui/models/Stable-diffusion/revAnimated_v122EOL.safetensors",
@@ -25,10 +27,10 @@ MODELS = {
 
 #
 PROMPT_LIST = [
-    # {"text": "a neon glowing sign", "file_name": "neon"},
-    # {"text": "winter ice sculpture ", "file_name": "winter"},
-    # {"text": "hot air balloons ", "file_name": "hot_air_balloons", "model":"real"},
-    # {"text": "(wood carving), (inlay), (etsy) ", "file_name": "wood_carving", "model":"real"},
+    {"text": "a neon glowing sign", "file_name": "neon"},
+    {"text": "winter ice sculpture ", "file_name": "winter"},
+    {"text": "hot air balloons ", "file_name": "hot_air_balloons", "model":"real"},
+    {"text": "(wood carving), (inlay), (etsy) ", "file_name": "wood_carving", "model":"real"},
     {
         "text": "paper cut, paper layers, laser cut, paper art, vibrant colors, ",
         "file_name": "paper_art",
@@ -91,11 +93,11 @@ def controlnet_generate(img_path, pipe, out_dir, prompts=PROMPT_LIST, controlnet
         preprocessed_image = preprocess(image, controlnet_path=controlnet)
 
     for p in prompts:
-        generator = torch.manual_seed(0)
+        generator = torch.manual_seed(SEED)
         for i in range(0, 1):
             print(DEFAULT_POSITIVE_SUFFIX)
             print(p["text"])
-            steps = 32
+            steps = STEPS
             image = pipe(
                 p["text"] + DEFAULT_POSITIVE_SUFFIX,
                 negative_prompt=DEFAULT_NEGATIVE_PROMPT,
