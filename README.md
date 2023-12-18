@@ -8,6 +8,7 @@ Quickly generate variations of a logo easily.
 
 3. See `out` folder for ~30 different variations of your logos.
 
+<img width="675" alt="image" src="https://github.com/davidrs/logo-buddy/assets/1407489/92714159-ecb8-40e5-8dbc-b4be5848e455">
 
 
 ## For Developers
