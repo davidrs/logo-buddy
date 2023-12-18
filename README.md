@@ -10,8 +10,8 @@ Quickly and easily generate logo variations.
 2. `make run`
 
 3. See `out` folder for ~30 different variations of your logos.
-
-<img width="675" alt="image" src="https://github.com/davidrs/logo-buddy/assets/1407489/92714159-ecb8-40e5-8dbc-b4be5848e455">
+4. 
+<img width="764" alt="image" src="https://github.com/davidrs/logo-buddy/assets/1407489/1bb4c467-b7b5-471c-a457-4c56a333d353">
 
 
 ## For Developers
