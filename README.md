@@ -1,4 +1,7 @@
+![logowhite](https://github.com/davidrs/logo-buddy/assets/1407489/22f10604-d87d-4082-9861-8f6128ad8d18)
 ## Logo-Buddy
+
+
 
 Quickly generate variations of a logo easily.
 
