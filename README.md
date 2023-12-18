@@ -1,9 +1,9 @@
-![logowhite](https://github.com/davidrs/logo-buddy/assets/1407489/22f10604-d87d-4082-9861-8f6128ad8d18)
-## Logo-Buddy
 
 
+## <img src="https://github.com/davidrs/logo-buddy/assets/1407489/22f10604-d87d-4082-9861-8f6128ad8d18" alt="logo buddy" style="max-width:50px;" width="150px"/>
 
-Quickly generate variations of a logo easily.
+
+Quickly and easily generate logo variations.
 
 1. Put input logos in to `input` folder.
 
