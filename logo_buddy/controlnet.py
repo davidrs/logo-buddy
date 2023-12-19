@@ -14,9 +14,9 @@ from .utils import read_fit
 
 MODEL_PATH = "/Users/drustsmith/repos/stable-diffusion-webui/models/Stable-diffusion/realisticVisionV51_v51VAE.safetensors"
 CN_MODELS = {
+    "qr": "/Users/drustsmith/repos/stable-diffusion-webui/models/ControlNet/controlnetQRPatternQR_v2Sd15.safetensors",
     "canny": "/Users/drustsmith/repos/stable-diffusion-webui/models/ControlNet/control_canny-fp16.safetensors",
     "depth": "/Users/drustsmith/repos/stable-diffusion-webui/models/ControlNet/control_depth-fp16.safetensors",
-    "qr": "/Users/drustsmith/repos/stable-diffusion-webui/models/ControlNet/controlnetQRPatternQR_v2Sd15.safetensors",
 }
 
 

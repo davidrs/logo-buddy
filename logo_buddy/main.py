@@ -19,7 +19,7 @@ from .controlnet import preprocess, CN_MODELS
 from .utils import read_fit
 
 STEPS = 34
-SEED = 123
+SEED = 12
 MODELS = {
     "real": "/Users/drustsmith/repos/stable-diffusion-webui/models/Stable-diffusion/realisticVisionV51_v51VAE.safetensors",
     "anim": "/Users/drustsmith/repos/stable-diffusion-webui/models/Stable-diffusion/revAnimated_v122EOL.safetensors",
@@ -27,8 +27,18 @@ MODELS = {
 
 #
 PROMPT_LIST = [
+    # Winter
+    {"text": "santa playing in the snow,  ethereal, dreamy, highly detailed, realistic lighting, sharp focus, rule of thirds, artgerm, wlop, arney freytag, hd, octane, 4 k, ", "file_name": "winter_santa", "model":"anim"}, #  <lora:fantasy00d:0.5>, animated    
+    {
+        "text": "ethereal fantasy concept art of  dreamscape Winter wonderland, surreal, ethereal, dreamy, mysterious, fantasy, highly detailed, magnificent, celestial, ethereal, painterly, epic, majestic, magical, fantasy art, cover art, dreamy",
+        "file_name": "winter_wonderland",
+        "model": "anim",
+    },
+    {"text": "((ginger bread house)), realistic, insanely detailed, octane rendered, unreal engine, illustration, trending on artstation, masterpiece, photography", "file_name": "winter_ginger", "model":"real"},
+    {"text": "winter ice sculpture ", "file_name": "winter_ice"},
+
+    # General
     {"text": "a neon glowing sign", "file_name": "neon"},
-    {"text": "winter ice sculpture ", "file_name": "winter"},
     {"text": "hot air balloons ", "file_name": "hot_air_balloons", "model":"real"},
     {"text": "(wood carving), (inlay), (etsy) ", "file_name": "wood_carving", "model":"real"},
     {
@@ -104,27 +114,31 @@ def controlnet_generate(img_path, pipe, out_dir, prompts=PROMPT_LIST, controlnet
                 num_inference_steps=steps,
                 generator=generator,
                 image=preprocessed_image,
+                # guidance_scale=20 if 'qr' in controlnet else 15,
+                # controlnet_conditioning_scale=2.0 if 'qr' in controlnet else 1.0,
+                # strength=0.85,
             ).images[0]
 
-            image.save(op.join(out_dir, f"{p['file_name']}_{steps}.png"))
+            image.save(op.join(out_dir, f"{p['file_name']}_{controlnet}_{SEED}.png"))
 
 
 # if main
 if __name__ == "__main__":
     for m, mp in MODELS.items():
         for cn, cn_path in CN_MODELS.items():
+            print()
             pipe = get_pipe(model_path=mp, controlnet_path=cn_path)
-            input_imgs = glob("input/*")
-
+            input_imgs = glob("input/*jpg") + glob("input/*jpeg") + glob("input/*png")
             for img_path in input_imgs:
+                print('model ', m, ' | controlnet', cn, ' | ',op.basename(img_path))
                 out_dir = op.join(OUT_DIR, op.basename(img_path).split(".")[0])
                 os.makedirs(out_dir, exist_ok=True)
-                out_dir = op.join(out_dir, op.basename(m).split(".")[0][:5] + f"_{cn}")
-                os.makedirs(out_dir, exist_ok=True)
+                # out_dir = op.join(out_dir, op.basename(m).split(".")[0][:5])
+                # os.makedirs(out_dir, exist_ok=True)
 
                 # subset prompts to ones asking for this model, or no model specified.
                 prompts = [p for p in PROMPT_LIST if p.get("model", m) == m]
 
                 controlnet_generate(
-                    img_path, pipe, controlnet="canny", out_dir=out_dir, prompts=prompts
+                    img_path, pipe, controlnet=cn, out_dir=out_dir, prompts=prompts
                 )
