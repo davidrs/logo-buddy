@@ -12,9 +12,8 @@ control:
 	# ln -s $(MODEL_PATH) model.safetensors
 	export PYTORCH_ENABLE_MPS_FALLBACK=1;
 	poetry run python -m logo_buddy.controlnet
+
 run:
-	# create sym link from model_path to model
-	# ln -s $(MODEL_PATH) model.safetensors
 	export PYTORCH_ENABLE_MPS_FALLBACK=1;
 	poetry run python -m logo_buddy.main
 
@@ -26,3 +25,6 @@ convert:
 		--checkpoint_path $(MODEL_PATH) \
 		--dump_path $(MODEL_NAME) \
 		--from_safetensors
+
+sticker:
+	poetry run python -m logo_buddy.sticker

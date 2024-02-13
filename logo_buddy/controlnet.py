@@ -14,15 +14,21 @@ from .utils import read_fit
 
 MODEL_PATH = "/Users/drustsmith/repos/stable-diffusion-webui/models/Stable-diffusion/realisticVisionV51_v51VAE.safetensors"
 CN_MODELS = {
-    "qr": "/Users/drustsmith/repos/stable-diffusion-webui/models/ControlNet/controlnetQRPatternQR_v2Sd15.safetensors",
-    "canny": "/Users/drustsmith/repos/stable-diffusion-webui/models/ControlNet/control_canny-fp16.safetensors",
     "depth": "/Users/drustsmith/repos/stable-diffusion-webui/models/ControlNet/control_depth-fp16.safetensors",
+    "canny": "/Users/drustsmith/repos/stable-diffusion-webui/models/ControlNet/control_canny-fp16.safetensors",
+    # "qr": "/Users/drustsmith/repos/stable-diffusion-webui/models/ControlNet/controlnetQRPatternQR_v2Sd15.safetensors",
 }
 
 
 def preprocess(image, controlnet_path=None):
     if "canny" in controlnet_path:
         return canny_preprocess(image)
+    if "depth" in controlnet_path:
+        # invert image
+        image = 255 - np.array(image)
+        #save copy of image
+        cv2.imwrite("depth.png", image)
+        return Image.fromarray(image)
     else:
         return Image.fromarray(image)
 

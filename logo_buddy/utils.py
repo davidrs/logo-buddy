@@ -1,4 +1,9 @@
+import os
 import cv2
+
+OUT_DIR = "./out"
+os.makedirs(OUT_DIR, exist_ok=True)
+
 
 #  Sampler: DPM++ SDE Karras, CFG scale: 6,
 def read_fit(img_path, max_width=768):
